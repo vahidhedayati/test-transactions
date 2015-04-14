@@ -13,3 +13,14 @@ This is what is sort of being achieved, to be honest I have not spread it over m
 ![BookingATrip](https://raw.github.com/vahidhedayati/test-transactions/master/images/Figure01_BookingATrip.jpg)
 
 
+
+http://localhost:8080/test-transactions/travelBooking/index1 works
+
+
+http://localhost:8080/test-transactions/travelBooking/index2 fails
+
+
+http://localhost:8080/test-transactions/travelBooking/index3 fails
+
+
+http://localhost:8080/test-transactions/travelBooking/index4 fails
