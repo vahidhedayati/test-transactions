@@ -24,6 +24,7 @@ class FlightManagerService {
 		return flight
 	}
 
+	
 	def getAvailableFlight(BookingRequest bookingRequest){
 		// (bookings().intValue()+1) < totalSeats().intValue()
 		//  && bookings < totalSeats
