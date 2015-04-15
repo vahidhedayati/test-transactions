@@ -26,28 +26,15 @@ class FlightManagerService {
 
 	
 	def getAvailableFlight(BookingRequest bookingRequest){
-		// (bookings().intValue()+1) < totalSeats().intValue()
-		//  && bookings < totalSeats
-		
 		def c = Flight.createCriteria()
-		
 		def flights = c.list {
 			eq ('from', bookingRequest.from)
 			eq ('to',bookingRequest.to)
 			eq ('flightdate',bookingRequest.traveldate)
 			gt ('seatsleft', 0)
-			maxResults(10)
+			maxResults(1)
 			order("id", "desc")
 		}
-		
-		/*
-		def flights=Flight.withCriteria {
-			eq ('from', bookingRequest.from)
-			eq ('to',bookingRequest.to)
-			eq ('flightdate',bookingRequest.traveldate)
-			gt ('seatsleft', 0)
-		}
-		*/
 		if (flights) {
 			println "FlightManagerImpl : getAvailableFlight() - Got flight....." + flights[0].flightname
 			return flights[0]

@@ -24,16 +24,10 @@ class HotelManagerService {
 	}
 
 	def getAvailableHotel(BookingRequest bookingRequest) {
-
-		def hotels=Hotel.withCriteria {
-			eq ('bookingdate', bookingRequest.traveldate)
-			eq ('toplace',bookingRequest.to)
-			gt ('roomsleft', 0)
-		}
-
+		def hotels = Hotel.findByBookingdateAndToplaceAndRoomsleftGreaterThan(bookingRequest.traveldate,bookingRequest.to,0 )
 		if (hotels){
-			println "HotelManagerImpl : getAvailableHotel() - Got hotel........" + hotels[0].hotelname
-			return hotels[0]
+			println "HotelManagerImpl : getAvailableHotel() - Got hotel........" + hotels.hotelname
+			return hotels
 		}
 		return null
 	}
