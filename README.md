@@ -4,7 +4,13 @@ In this tutorial I hope to be able to explain to a Java developer on how I have 
 [jotm-transactions-in-spring-and-hibernate.html](https://today.java.net/pub/a/today/2006/08/31/jotm-transactions-in-spring-and-hibernate.html) over to a grails application.
 
 
-The provide the [actual source here](https://today.java.net/sites/all/modules/pubdlcnt/pubdlcnt.php?file=/today/2006/08/31/JotmInSpringAndHibernateSrc.zip&nid=219704). It can be found in this project under JotmInSpringAndHibernateSrc folder.
+The provide the [actual source here](https://today.java.net/sites/all/modules/pubdlcnt/pubdlcnt.php?file=/today/2006/08/31/JotmInSpringAndHibernateSrc.zip&nid=219704). It can be found in this project under [JotmInSpringAndHibernateSrc folder](https://github.com/vahidhedayati/test-transactions/tree/master/JotmInSpringAndHibernateSrc).
+
+
+This is what is sort of being achieved, at the moment I have not spread it over multiple Databases and only using internal DB as part of the test: (will use mysql in conjunction when I next time to actually test all of these on the fly updates)
+
+
+![BookingATrip](https://raw.github.com/vahidhedayati/test-transactions/master/images/Figure01_BookingATrip.jpg)
 
 
 
@@ -146,14 +152,6 @@ grails run-app
 
 You will need grails 2.4.4 and you will need JDK 7+
 
-
-Original content:
-
-
-This is what is sort of being achieved,at the moment I have not spread it over multi DB's and only using internal DB as part of the test:
-
-
-![BookingATrip](https://raw.github.com/vahidhedayati/test-transactions/master/images/Figure01_BookingATrip.jpg)
 
 
 
