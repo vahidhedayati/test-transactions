@@ -8,8 +8,8 @@ import com.example.model.Hotel
 
 
 class HotelManagerService {
-
-	@Transactional
+	
+	@Transactional(rollbackFor=HotelNotFoundException.class)
 	def reserveHotel(BookingRequest bookingRequest) throws HotelNotFoundException {
 		Hotel hotel = getAvailableHotel(bookingRequest)
 		if(hotel){
@@ -24,19 +24,13 @@ class HotelManagerService {
 	}
 
 	def getAvailableHotel(BookingRequest bookingRequest) {
-		//(bookings().intValue()+1) < totalrooms().intValue()
+
 		def hotels=Hotel.withCriteria {
 			eq ('bookingdate', bookingRequest.traveldate)
 			eq ('toplace',bookingRequest.to)
-			//lt ('bookings', 'totalrooms')
-			//(bookings().intValue()+1) < totalrooms().intValue()
+			gt ('roomsleft', 0)
 		}
-		/*
-		 def hotels = Hotel.where {
-		 bookingdate == bookingRequest.traveldate && 
-		 toplace == bookingRequest.to 
-		 }
-		 */
+
 		if (hotels){
 			println "HotelManagerImpl : getAvailableHotel() - Got hotel........" + hotels[0].hotelname
 			return hotels[0]

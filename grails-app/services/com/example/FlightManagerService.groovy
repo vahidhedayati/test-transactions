@@ -10,7 +10,7 @@ import com.example.model.Flight
 
 class FlightManagerService {
 
-	@Transactional
+	@Transactional(rollbackFor=FlightNotFoundException.class)
 	def reserveFlight(BookingRequest bookingRequest) throws FlightNotFoundException {
 		//println  "bookingRequest: ::0 >${bookingRequest}< ::1 >${bookingRequest.to}< ::2  >${bookingRequest.from}< ::3 >${bookingRequest.traveldate}<"
 		Flight flight = getAvailableFlight(bookingRequest)
@@ -19,11 +19,7 @@ class FlightManagerService {
 		}
 		flight.bookings = flight.bookings +1
 		flight.save(flush:true)
-		//flight.each { Flight fl ->
-		//fl.bookings = fl.bookings +1
-		//fl.save(flush:true)
-		//}
-
+		
 		//println  "FLIGHT updated ${flight}"
 		return flight
 	}
@@ -31,12 +27,26 @@ class FlightManagerService {
 	def getAvailableFlight(BookingRequest bookingRequest){
 		// (bookings().intValue()+1) < totalSeats().intValue()
 		//  && bookings < totalSeats
+		
+		def c = Flight.createCriteria()
+		
+		def flights = c.list {
+			eq ('from', bookingRequest.from)
+			eq ('to',bookingRequest.to)
+			eq ('flightdate',bookingRequest.traveldate)
+			gt ('seatsleft', 0)
+			maxResults(10)
+			order("id", "desc")
+		}
+		
+		/*
 		def flights=Flight.withCriteria {
 			eq ('from', bookingRequest.from)
 			eq ('to',bookingRequest.to)
 			eq ('flightdate',bookingRequest.traveldate)
-			//lt ('bookings', 'totalSeats')
+			gt ('seatsleft', 0)
 		}
+		*/
 		if (flights) {
 			println "FlightManagerImpl : getAvailableFlight() - Got flight....." + flights[0].flightname
 			return flights[0]

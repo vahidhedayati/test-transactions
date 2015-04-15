@@ -1,11 +1,10 @@
 package com.example.exception
 
-class TravelException extends Exception{
+class TravelException extends Exception {
 
-
-    public TravelException(String msg){
-        super(msg)
-    }
- 
-
+	@Override
+	public Throwable fillInStackTrace() {
+		// do nothing
+		return this
+	}
 }

@@ -10,7 +10,7 @@ import com.example.model.Car
 class CarManagerService {
 
 	@Transactional
-	def reserveCar(BookingRequest bookingRequest)throws CarNotFoundException {
+	def reserveCar(BookingRequest bookingRequest) throws CarNotFoundException {
 		Car car = getExactCar(bookingRequest)
 		if (!car){
 			car = getAvailableCar(bookingRequest)
