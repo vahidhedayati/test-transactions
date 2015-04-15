@@ -6,4 +6,8 @@ class Trip  {
    Hotel hotel
    Car car
    
+   String toString() {
+	   "${flight} ${hotel} ${car}" 
+   }
+   
 }

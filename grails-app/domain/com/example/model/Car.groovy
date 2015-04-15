@@ -7,14 +7,19 @@ class Car  {
     String from
     String to
     Date bookingdate
-	/*
+	
+	
 	static constraints = {
 		booked size: 1..1
 	}
-	*/
+	
 	
 	static mapping = {
 		to column: '`to`'
 		from column: '`from`'
 	 }
+	
+	String toString() {
+		carname
+	}
 }

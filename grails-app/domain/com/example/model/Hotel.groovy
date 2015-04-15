@@ -20,5 +20,8 @@ class Hotel  {
 		roomtype size: 1..1
 	}
 	
+	String toString() {
+		hotelname
+	}
 	
 }

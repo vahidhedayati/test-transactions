@@ -10,4 +10,8 @@ class BookingRequest {
 		to column: '`to`'
 		from column: '`from`'
 	 }
+	
+	String toString() { 
+		"${to} ${from} ${traveldate}"
+	}
 }

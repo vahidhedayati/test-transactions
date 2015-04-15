@@ -19,4 +19,8 @@ class Flight {
 		seatsleft formula: 'BOOKINS + 1 - TOTAL_SEATS'
 	 }
 	
+	String toString() {
+		flightname
+	}
+	
 }
