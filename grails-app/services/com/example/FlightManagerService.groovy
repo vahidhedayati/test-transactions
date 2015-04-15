@@ -19,11 +19,9 @@ class FlightManagerService {
 		}
 		flight.bookings = flight.bookings +1
 		flight.save(flush:true)
-		
 		//println  "FLIGHT updated ${flight}"
 		return flight
 	}
-
 	
 	def getAvailableFlight(BookingRequest bookingRequest){
 		def c = Flight.createCriteria()
