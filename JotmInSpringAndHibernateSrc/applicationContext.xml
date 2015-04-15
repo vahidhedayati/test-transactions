@@ -1,0 +1,244 @@
+<!--
+Copyright (c) 2006 Binildas A Christudas / Sowmya Hubert. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+- Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+
+- Redistribution in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in
+  the documentation and/or other materials provided with the
+  distribution.
+
+Neither the name of the author, or the names of
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+This software is provided "AS IS," without a warranty of any
+kind. ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND
+WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE HEREBY
+EXCLUDED. AUTHOR AND ITS LICENSORS SHALL NOT BE LIABLE FOR ANY DAMAGES
+SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR
+DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES. IN NO EVENT WILL THE AUTHOR
+OR ITS LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR
+FOR DIRECT, INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR
+PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF
+LIABILITY, ARISING OUT OF THE USE OF OR INABILITY TO USE SOFTWARE,
+EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+You acknowledge that Software is not designed, licensed or intended
+for use in the design, construction, operation or maintenance of
+any nuclear facility.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <bean id="jotm" class="org.springframework.transaction.jta.JotmFactoryBean"/>
+
+    <bean id="dataSource1" class="org.enhydra.jdbc.pool.StandardXAPoolDataSource" destroy-method="shutdown">
+        <property name="dataSource">
+            <bean class="org.enhydra.jdbc.standard.StandardXADataSource" destroy-method="shutdown">
+            <property name="transactionManager"><ref local="jotm"/></property>
+            <property name="driverName"><value>com.pointbase.jdbc.jdbcUniversalDriver</value></property>
+            <property name="url"><value>jdbc:pointbase:server://127.0.0.1/demo</value></property>
+            </bean>
+        </property>
+        <property name="user"><value>PBPUBLIC</value></property>
+        <property name="password"><value>PBPUBLIC</value></property>
+    </bean>
+
+    <bean id="dataSource2" class="org.enhydra.jdbc.pool.StandardXAPoolDataSource" destroy-method="shutdown">
+        <property name="dataSource">
+            <bean class="org.enhydra.jdbc.standard.StandardXADataSource" destroy-method="shutdown">
+            <property name="transactionManager"><ref local="jotm"/></property>
+            <property name="driverName"><value>oracle.jdbc.driver.OracleDriver</value></property>
+            <property name="url"><value>jdbc:oracle:thin:@127.0.0.1:1521:tigerdb</value></property>
+            </bean>
+        </property>
+        <property name="user"><value>scott</value></property>
+        <property name="password"><value>tiger</value></property>
+    </bean>
+
+    <bean id="dataSource3" class="org.enhydra.jdbc.pool.StandardXAPoolDataSource" destroy-method="shutdown">
+        <property name="dataSource">
+            <bean class="org.enhydra.jdbc.standard.StandardXADataSource" destroy-method="shutdown">
+            <property name="transactionManager"><ref local="jotm"/></property>
+            <property name="driverName"><value>com.pointbase.jdbc.jdbcUniversalDriver</value></property>
+            <property name="url"><value>jdbc:pointbase:server://127.0.0.1/demo</value></property>
+            </bean>
+        </property>
+        <property name="user"><value>PBPUBLIC</value></property>
+        <property name="password"><value>PBPUBLIC</value></property>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory1" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource"><ref local="dataSource1"/></property>
+        <property name="mappingResources">
+            <list>
+                <value>com/example/model/Flight.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+        <props>
+            <!--prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop-->
+            <prop key="hibernate.dialect">net.sf.hibernate.dialect.PointbaseDialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop>
+        </props>
+        </property>
+    </bean>
+
+    <bean id="sessionFactory2" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource"><ref local="dataSource2"/></property>
+        <property name="mappingResources">
+            <list>
+                <value>com/example/model/Hotel.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop>
+            <!--prop key="hibernate.dialect">net.sf.hibernate.dialect.PointbaseDialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop-->
+        </props>
+        </property>
+    </bean>
+
+    <bean id="sessionFactory3" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource"><ref local="dataSource3"/></property>
+        <property name="mappingResources">
+            <list>
+                <value>com/example/model/Car.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+        <props>
+            <!--prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop-->
+            <prop key="hibernate.dialect">net.sf.hibernate.dialect.PointbaseDialect</prop>
+            <prop key="hibernate.hbm2ddl.auto">create</prop>
+        </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager1" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="userTransaction"><ref local="jotm"/></property>
+    </bean>
+
+    <bean id="transactionManager2" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="userTransaction"><ref local="jotm"/></property>
+    </bean>
+
+    <bean id="flightDAO" class="com.example.dao.hibernate.FlightDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory1"/></property>
+    </bean>    
+
+    <bean id="flightManagerTarget" class="com.example.service.impl.FlightManagerImpl">
+        <property name="flightDao"><ref local="flightDAO"/></property>
+    </bean>
+
+    <bean id="flightManager" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager1"/></property>
+        <property name="target"><ref local="flightManagerTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="reserveFlight">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hotelDAO" class="com.example.dao.hibernate.HotelDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory2"/></property>
+    </bean>    
+
+    <bean id="hotelManagerTarget" class="com.example.service.impl.HotelManagerImpl">
+        <property name="hotelDao"><ref local="hotelDAO"/></property>
+    </bean>
+
+    <bean id="hotelManager" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager1"/></property>
+        <property name="target"><ref local="hotelManagerTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="reserveHotel">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="carDAO" class="com.example.dao.hibernate.CarDaoHibernate">
+        <property name="sessionFactory"><ref local="sessionFactory3"/></property>
+    </bean>    
+
+    <bean id="carManagerTarget" class="com.example.service.impl.CarManagerImpl">
+        <property name="carDao"><ref local="carDAO"/></property>
+    </bean>
+
+    <bean id="carManagerRequired" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager1"/></property>
+        <property name="target"><ref local="carManagerTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="reserveCar">PROPAGATION_REQUIRED,-com.example.exception.CarNotFoundException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="carManagerRequiresNew" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager1"/></property>
+        <property name="target"><ref local="carManagerTarget"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="reserveCar">PROPAGATION_REQUIRES_NEW,-com.example.exception.CarNotFoundException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="travelBrokerTargetRequired" class="com.example.service.impl.TravelBrokerImpl">
+        <property name="flightManager"><ref local="flightManager"/></property>
+        <property name="hotelManager"><ref local="hotelManager"/></property>
+        <property name="carManager"><ref local="carManagerRequired"/></property>
+    </bean>
+
+    <bean id="travelBrokerRequired" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager2"/></property>
+        <property name="target"><ref local="travelBrokerTargetRequired"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="bookTrip">PROPAGATION_REQUIRED,-com.example.exception.TravelException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="travelBrokerTargetRequiresNew" class="com.example.service.impl.TravelBrokerImpl">
+        <property name="flightManager"><ref local="flightManager"/></property>
+        <property name="hotelManager"><ref local="hotelManager"/></property>
+        <property name="carManager"><ref local="carManagerRequiresNew"/></property>
+    </bean>
+
+    <bean id="travelBrokerRequiresNew" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref local="transactionManager2"/></property>
+        <property name="target"><ref local="travelBrokerTargetRequiresNew"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="bookTrip">PROPAGATION_REQUIRED,-com.example.exception.TravelCompletionException</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

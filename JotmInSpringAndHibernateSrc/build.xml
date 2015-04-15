@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project name="equinox" basedir="." default="compile">
+    <property name="root.dir" value="."/>
+    <property name="src.dir" value="src"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="JotmLib.dir" value="JotmLib"/>
+    <property name="build.dir" value="build"/>
+
+    <property environment="env"/>
+    <property name="tomcat.home" value="${env.CATALINA_HOME}"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${JotmLib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.home}/common/lib">
+            <include name="servlet*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+        <pathelement path="${root.dir}"/>
+    </path>
+    
+    <target name="clean" description="cleans">
+    	<delete dir="build"/>
+    </target>
+
+    <target name="compile" description="Compile main source tree java files" depends="clean">
+        <mkdir dir="${build.dir}/classes"/>
+        <javac destdir="${build.dir}/classes" debug="true"
+            deprecation="false" optimize="false" failonerror="true">
+            <src path="${src.dir}"/>
+            <classpath refid="classpath"/>
+        </javac>
+        <!-- Copy hibernate mapping files to ${build.dir}/classes -->
+        <copy todir="${build.dir}/classes">
+            <fileset dir="${src.dir}" includes="**/*.hbm.xml"/>
+        </copy>
+    </target>
+
+  <target name="run1">
+	  <java classname="com.example.client.TravelBookingClient" fork="yes" failonerror="true">
+	    <classpath>
+	       <path refid="classpath"/>
+	       <path location="${build.dir}/classes"/>
+	    </classpath>
+	    <arg value="1"/>
+	  </java>
+  </target>
+
+  <target name="run2">
+	  <java classname="com.example.client.TravelBookingClient" fork="yes" failonerror="true">
+	    <classpath>
+	       <path refid="classpath"/>
+	       <path location="${build.dir}/classes"/>
+	    </classpath>
+	    <arg value="2"/>
+	  </java>
+  </target>
+
+  <target name="run3">
+	  <java classname="com.example.client.TravelBookingClient" fork="yes" failonerror="true">
+	    <classpath>
+	       <path refid="classpath"/>
+	       <path location="${build.dir}/classes"/>
+	    </classpath>
+	    <arg value="3"/>
+	  </java>
+  </target>
+
+  <target name="run4">
+	  <java classname="com.example.client.TravelBookingClient" fork="yes" failonerror="true">
+	    <classpath>
+	       <path refid="classpath"/>
+	       <path location="${build.dir}/classes"/>
+	    </classpath>
+	    <arg value="4"/>
+	  </java>
+  </target>
+
+</project>
