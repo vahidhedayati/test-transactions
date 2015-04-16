@@ -177,18 +177,6 @@ Lufthansa | Bookings 0 | Rooms: 10 >> 10
 Lufthansa | Bookings 0 | Rooms: 10 >> 10
 Lufthansa | Bookings 0 | Rooms: 10 >> 10
 
-I will Sofitel | Bookings 1 | Rooms: 10 | Left : 9
-The Ritz-Carlton | Bookings 0 | Rooms: 10 | Left : 10
-Affinia Dumont | Bookings 0 | Rooms: 10 | Left : 10
-Trump International Hotel | Bookings 0 | Rooms: 10 | Left : 10
-Hilton Times Square | Bookings 0 | Rooms: 10 | Left : 10
-Singapore Square | Bookings 0 | Rooms: 10 | Left : 10
-Lufthansa | Bookings 10 | Rooms: 10 >> 0
-Lufthansa | Bookings 0 | Rooms: 10 >> 10
-Lufthansa | Bookings 0 | Rooms: 10 >> 10
-Lufthansa | Bookings 0 | Rooms: 10 >> 10
-Lufthansa | Bookings 0 | Rooms: 10 >> 10
-Lufthansa | Bookings 0 | Rooms: 10 >> 10
 ```
 
 I will be working on this to show how transactions rolling back in this all or none situation.. if I can or if possible..
