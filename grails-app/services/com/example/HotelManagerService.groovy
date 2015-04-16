@@ -12,25 +12,25 @@ class HotelManagerService {
 	@Transactional(rollbackFor=HotelNotFoundException.class)
 	def reserveHotel(BookingRequest bookingRequest) throws HotelNotFoundException {
 		Hotel hotel = getAvailableHotel(bookingRequest)
+		//println "___ WE HAVE ${hotel} ${hotel.bookings} >>>>"
 		if(hotel){
-			hotel.bookings =  +1
-			
+			hotel.bookings = hotel.bookings + 1
 			if (!hotel.save(flush:true)) { 
-				throw new HotelNotFoundException("Issue updating hotel")
+				throw new HotelNotFoundException()
+				//throw new Exception("Issue updating hotel")
 			}
-			
-			println "HOTEL updated ${hotel} should be saved"
+			log.info "HOTEL updated ${hotel} should be saved"
 			return hotel
 		}
-
 		log.error "HotelManagerImpl : reserveHotel() - Hotel not available"
-		return null
+		throw new HotelNotFoundException()
+		return
 	}
 
 	def getAvailableHotel(BookingRequest bookingRequest) {
-		def hotels = Hotel.findByBookingdateAndToplaceAndRoomsleftGreaterThan(bookingRequest.traveldate,bookingRequest.to,0 )
+		def hotels = Hotel.findByBookingdateAndToplaceAndRoomsleftGreaterThan(bookingRequest.traveldate,bookingRequest.to, 0)
 		if (hotels){
-			println "HotelManagerImpl : getAvailableHotel() - Got hotel........" + hotels.hotelname
+			log.info "HotelManagerImpl : getAvailableHotel() - Got hotel........" + hotels.hotelname
 			return hotels
 		}
 		return null

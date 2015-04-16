@@ -16,27 +16,23 @@ class CarManagerService {
 			car = getAvailableCar(bookingRequest)
 		}
 		if (car) {
-			
-			//if (!car.save(flush:true)) {
-			//	throw new CarNotFoundException("Issue updating car")
-			//}
-			
-			
 			Calendar checkDate = Calendar.getInstance()
 			checkDate.setTime(bookingRequest.getTraveldate())
 			checkDate.add(Calendar.DAY_OF_MONTH,1)
 			if (car.bookingdate.compareTo(checkDate.getTime())>0) {
-				throw new CarNotFoundException("Car date does not match.")
+				throw new CarNotFoundException()
+				//throw new Exception("Car date does not match.")
 			}
-
 			return car
 		}
+		throw new CarNotFoundException()
+		return
 	}
 
 	def getAvailableCar(BookingRequest bookingRequest) {
 		Car cars = Car.findByToAndBooked(bookingRequest.getTo(), 'N')
 		if (cars) {
-			println "CarManagerImpl : getAvailableCar() - Got available car......" + cars.carname
+			log.info "CarManagerImpl : getAvailableCar() - Got available car......" + cars.carname
 			return cars
 		}
 		return null

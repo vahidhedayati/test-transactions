@@ -8,7 +8,7 @@ import com.example.model.Trip
 
 @Transactional
 class TravelBookingService {
-	
+
 	//Inject service
 	def travelBrokerService
 
@@ -17,15 +17,20 @@ class TravelBookingService {
 		StringBuilder output = new StringBuilder()
 		BookingRequest bookingRequest = new BookingRequest(traveldate: traveldate, from: from, to: to)
 		
+		if (!bookingRequest.save(flush:true)) { 
+			throw new TravelCompletionException()	
+		}
+		
 		Trip trip
 		if (bookingRequest) {
 			trip = travelBrokerService.bookTrip(bookingRequest)
 		}
-		
+
 		if ((!bookingRequest) ||(!trip)) {
-			throw new TravelCompletionException("((null == trip)");
+			//throw new Exception("((null == trip)");
+			throw new TravelCompletionException()
 		}
-		
+
 		output.append("${action}: "+ trip)
 		return output
 	}

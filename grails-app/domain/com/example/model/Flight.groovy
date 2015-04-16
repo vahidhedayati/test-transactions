@@ -9,9 +9,10 @@ class Flight {
     int totalSeats
     Date flightdate
 	
-	
 	int seatsleft
-	//static transients = ['seatsleft']
+	//int getSeatsleft() { (totalSeats - (bookings+1)) }
+	
+	static hasMany = [trip: Trip]
 	
 	static constraints = {
 		seatsleft nullable: true
@@ -19,9 +20,10 @@ class Flight {
 	
 	
 	static mapping = {
+		//datasource "DEFAULT"
 		to column: '`to`'
 		from column: '`from`'
-		seatsleft formula: 'TOTAL_SEATS - BOOKINGS'
+		seatsleft formula: 'TOTAL_SEATS - (BOOKINGS+1)'
 	 }
 	
 	String toString() {

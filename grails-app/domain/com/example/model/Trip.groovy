@@ -9,5 +9,9 @@ class Trip  {
    String toString() {
 	   "${flight} ${hotel} ${car}" 
    }
+   static mapping = {
+	 //  datasources(['mysql', 'DEFAULT'])
+	  // datasource 'ALL'
+   }
    
 }

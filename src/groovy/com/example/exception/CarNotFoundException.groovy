@@ -1,7 +1,7 @@
 package com.example.exception
 
 class CarNotFoundException extends TravelException {
-	
+	/*
 	public CarNotFoundException() {
 		super()
 	}
@@ -13,5 +13,5 @@ class CarNotFoundException extends TravelException {
 	public CarNotFoundException(Exception e) {
 		super(e.getMessage())
 	}
-
+*/
 }

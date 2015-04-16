@@ -25,52 +25,43 @@ class BootStrap {
 		Car car6 = Car.findOrSaveWhere(carname: "car5", booked: 'N',  
 			from: "California", to: "California", bookingdate:  cDate(2005, 1, 5))
 			
-
-			/*
-			 * traveldate: (new GregorianCalendar(2005, 1, 1)).getTime(), to: "Dallas", from: "Cochin")
-			 */
+		
+		Flight flight1 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Dallas", to: "Cochin", bookings: 0, totalSeats: 12,
+			flightdate: cDate(2005, 1, 1))
 			
-		Flight flight1 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Dallas", to: "Cochin", bookings: 0, totalSeats: 10, 
-			flightdate: cDate(2005, 1, 1), seatsleft: 10)
+		Flight flight2 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "NewYork", to: "Chennai", bookings: 0, totalSeats: 12,
+			flightdate: cDate(2005, 1, 1))
 			
-		Flight flight2 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "NewYork", to: "Chennai", bookings: 0, totalSeats: 10, 
-			flightdate: cDate(2005, 1, 1), seatsleft: 10)
+		Flight flight3 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Dallas", to: "Singapore", bookings: 0, totalSeats: 12,
+			flightdate: cDate(2005, 1, 2))
 			
-		Flight flight3 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Dallas", to: "Singapore", bookings: 0, totalSeats: 10, 
-			flightdate: cDate(2005, 1, 2), seatsleft: 10)
+		Flight flight4 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "NewYork", to: "Delhi", bookings: 0, totalSeats: 12,
+			flightdate:cDate(2005, 1, 2))
 			
-		Flight flight4 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "NewYork", to: "Delhi", bookings: 0, totalSeats: 10, 
-			flightdate:cDate(2005, 1, 2), seatsleft: 10)
+		Flight flight5 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "California", to: "Cochin", bookings: 0, totalSeats: 12,
+			flightdate: cDate(2005, 1, 3))
 			
-		Flight flight5 = Flight.findOrSaveWhere(flightname: "Lufthansa", from: "California", to: "Cochin", bookings: 0, totalSeats: 10, 
-			flightdate: cDate(2005, 1, 3), seatsleft: 10)
-			
-		Flight flight6 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Singapore", to: "Cochin", bookings: 0, totalSeats: 10, 
-			flightdate: cDate(2005, 1, 3), seatsleft: 10)
+		Flight flight6 =  Flight.findOrSaveWhere(flightname: "Lufthansa", from: "Singapore", to: "Cochin", bookings: 0, totalSeats: 12,
+			flightdate: cDate(2005, 1, 3))
 		
 			
+		Hotel hotel1 = Hotel.findOrSaveWhere(hotelname: "Sofitel", roomtype: 'A',  bookings: 0, toplace : "Cochin",  totalrooms: 10,
+			bookingdate: cDate(2005, 1, 1))
 			
+		Hotel hotel2 =  Hotel.findOrSaveWhere(hotelname: "The Ritz-Carlton", roomtype: 'A',  bookings: 0, toplace: "NewYork", totalrooms: 10,
+			bookingdate: cDate(2005, 1, 1))
 		
-
-		Hotel hotel1 = Hotel.findOrSaveWhere(hotelname: "Sofitel", roomtype: 'A',  bookings: 0, toplace : "Cochin",  totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 1), roomsleft: 10)
+		Hotel hotel3 =  Hotel.findOrSaveWhere(hotelname: "Affinia Dumont", roomtype: 'B',  bookings: 0, toplace: "Dallas",  totalrooms: 10,
+			bookingdate: cDate(2005, 1, 2))
 			
-		Hotel hotel2 =  Hotel.findOrSaveWhere(hotelname: "The Ritz-Carlton", roomtype: 'A',  bookings: 0, toplace: "NewYork", totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 1), roomsleft: 10)
-		
-		Hotel hotel3 =  Hotel.findOrSaveWhere(hotelname: "Affinia Dumont", roomtype: 'B',  bookings: 0, toplace: "Dallas",  totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 2), roomsleft: 10)
+		Hotel hotel4 =  Hotel.findOrSaveWhere(hotelname: "Trump International Hotel", roomtype: 'C', bookings: 0, toplace: "NewYork", totalrooms: 10,
+			bookingdate: cDate(2005, 1, 2))
 			
-		Hotel hotel4 =  Hotel.findOrSaveWhere(hotelname: "Trump International Hotel", roomtype: 'C', bookings: 0, toplace: "NewYork", totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 2), roomsleft: 10)
+		Hotel hotel5 =  Hotel.findOrSaveWhere(hotelname: "Hilton Times Square", roomtype: 'C',  bookings: 0, toplace: "California", totalrooms: 10,
+			bookingdate: cDate(2005, 1, 3))
 			
-		Hotel hotel5 =  Hotel.findOrSaveWhere(hotelname: "Hilton Times Square", roomtype: 'C',  bookings: 0, toplace: "California", totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 3), roomsleft: 10)
-			
-		Hotel hotel6 =  Hotel.findOrSaveWhere(hotelname: "Singapore Square", roomtype: 'C',  bookings: 0, toplace: "Cochin", totalrooms: 10, 
-			bookingdate: cDate(2005, 1, 3), roomsleft: 10)
-		
-		
+		Hotel hotel6 =  Hotel.findOrSaveWhere(hotelname: "Singapore Square", roomtype: 'C',  bookings: 0, toplace: "Cochin", totalrooms: 10,
+			bookingdate: cDate(2005, 1, 3))
     }
     def destroy = {
     }

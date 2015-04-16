@@ -8,6 +8,7 @@ class Car  {
     String to
     Date bookingdate
 	
+	static hasMany = [trip: Trip]
 	
 	static constraints = {
 		booked size: 1..1
@@ -15,6 +16,7 @@ class Car  {
 	
 	
 	static mapping = {
+		//datasource "DEFAULT"
 		to column: '`to`'
 		from column: '`from`'
 	 }

@@ -14,25 +14,23 @@ class FlightManagerService {
 	def reserveFlight(BookingRequest bookingRequest) throws FlightNotFoundException {
 		//println  "bookingRequest: ::0 >${bookingRequest}< ::1 >${bookingRequest.to}< ::2  >${bookingRequest.from}< ::3 >${bookingRequest.traveldate}<"
 		Flight flight = getAvailableFlight(bookingRequest)
-		if (!flight){
-			throw new FlightNotFoundException("Flight not available")
+		if (flight){
+			flight.bookings = flight.bookings + 1
+			if (!flight.save(flush:true)) {
+				throw new FlightNotFoundException()
+				//throw new Exception("Issue updating flight")
+			}
+			log.info "FLIGHT updated ${flight}"
+			return flight
 		}
-		flight.bookings = flight.bookings +1
-		
-		if (!flight.save(flush:true)) {
-			throw new FlightNotFoundException("Issue updating flight")
-		}
-		
-		//println  "FLIGHT updated ${flight}"
-		return flight
+		throw new FlightNotFoundException()
+		return
 	}
-	
+
 	def getAvailableFlight(BookingRequest bookingRequest){
-		
 		Flight flights = Flight.findByFromAndToAndFlightdateAndSeatsleftGreaterThan(bookingRequest.from, bookingRequest.to, bookingRequest.traveldate, 0 )
-		//Flight flights = Flight.findByFromAndToAndFlightdate(bookingRequest.from, bookingRequest.to, bookingRequest.traveldate )
 		if (flights) {
-			println "FlightManagerImpl : getAvailableFlight() - Got flight....." + flights.flightname
+			log.info "FlightManagerImpl : getAvailableFlight() - Got flight....." + flights.flightname
 			return flights
 		}
 		return null

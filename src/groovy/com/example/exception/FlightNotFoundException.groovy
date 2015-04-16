@@ -1,7 +1,7 @@
 package com.example.exception
 
 class FlightNotFoundException  extends TravelException {
-
+/*
 	public FlightNotFoundException() {
 		super()
 	}
@@ -13,5 +13,6 @@ class FlightNotFoundException  extends TravelException {
 	public FlightNotFoundException(Exception e) {
 		super(e.getMessage())
 	}
+	*/
 
 }
