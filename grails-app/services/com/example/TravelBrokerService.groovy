@@ -3,7 +3,6 @@ package com.example
 import grails.transaction.Transactional
 
 import com.example.exception.TravelCompletionException
-import com.example.exception.TravelException
 import com.example.model.BookingRequest
 import com.example.model.Car
 import com.example.model.Flight
@@ -18,8 +17,8 @@ class TravelBrokerService {
 	def hotelManagerService
 	def carManagerService
 	
-	@Transactional(rollbackFor=TravelException.class)
-	public Trip bookTrip(BookingRequest bookingRequest) throws TravelException{
+	@Transactional(rollbackFor=TravelCompletionException.class)
+	public Trip bookTrip(BookingRequest bookingRequest) throws TravelCompletionException {
 		// Reserve flight
 		Flight flight = flightManagerService.reserveFlight(bookingRequest)
 		// Reserve hotel
@@ -40,7 +39,7 @@ class TravelBrokerService {
 				println "TravelBrokerImpl : bookTrip() - NULL car"
 			}
 			
-			 throw new TravelCompletionException("((null == flight) || (null == hotel) || (null == car))");
+			 throw new TravelCompletionException("((null == flight) || (null == hotel) || (null == car))")
 		}
 		
 		Trip trip =  new Trip(flight: flight, hotel: hotel, car: car).save(failOnError: true, flush: true)

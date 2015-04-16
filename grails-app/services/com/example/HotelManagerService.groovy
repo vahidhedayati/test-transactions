@@ -14,7 +14,11 @@ class HotelManagerService {
 		Hotel hotel = getAvailableHotel(bookingRequest)
 		if(hotel){
 			hotel.bookings =  +1
-			hotel.save(flush:true)
+			
+			if (!hotel.save(flush:true)) { 
+				throw new HotelNotFoundException("Issue updating hotel")
+			}
+			
 			println "HOTEL updated ${hotel} should be saved"
 			return hotel
 		}

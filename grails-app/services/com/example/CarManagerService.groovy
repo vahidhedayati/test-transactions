@@ -16,7 +16,12 @@ class CarManagerService {
 			car = getAvailableCar(bookingRequest)
 		}
 		if (car) {
-			car.save(flush:true)
+			
+			//if (!car.save(flush:true)) {
+			//	throw new CarNotFoundException("Issue updating car")
+			//}
+			
+			
 			Calendar checkDate = Calendar.getInstance()
 			checkDate.setTime(bookingRequest.getTraveldate())
 			checkDate.add(Calendar.DAY_OF_MONTH,1)
@@ -29,19 +34,19 @@ class CarManagerService {
 	}
 
 	def getAvailableCar(BookingRequest bookingRequest) {
-		def cars = Car.findAllByToAndBooked(bookingRequest.getTo(), 'N')
+		Car cars = Car.findByToAndBooked(bookingRequest.getTo(), 'N')
 		if (cars) {
-			println "CarManagerImpl : getAvailableCar() - Got available car......" + cars[0].carname
-			return cars[0]
+			println "CarManagerImpl : getAvailableCar() - Got available car......" + cars.carname
+			return cars
 		}
 		return null
 	}
 
 	def getExactCar(BookingRequest bookingRequest) {
-		def cars = Car.findAllByToAndBookedAndBookingdate(bookingRequest.getTo(), 'Y', bookingRequest.getTraveldate())
+		Car cars = Car.findByToAndBookedAndBookingdate(bookingRequest.getTo(), 'Y', bookingRequest.getTraveldate())
 		if (cars) {
-			println "CarManagerImpl : getExactCar() - Got exact car......" + cars[0].carname
-			return cars[0]
+			println "CarManagerImpl : getExactCar() - Got exact car......" + cars.carname
+			return cars
 		}
 		return null
 	}

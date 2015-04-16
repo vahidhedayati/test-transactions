@@ -10,14 +10,15 @@ class Hotel  {
 	Date bookingdate
 	
 	int roomsleft
-	static transients = ['roomsleft']
+	//static transients = ['roomsleft']
 	static mapping = { 
-		roomsleft formula: 'BOOKINS + 1 - TOTALROOMS'
+		roomsleft formula: 'TOTALROOMS - BOOKINGS'
 	}
 	
 	
 	static constraints = {
 		roomtype size: 1..1
+		roomsleft nullable: true
 	}
 	
 	String toString() {

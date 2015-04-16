@@ -7,7 +7,7 @@ In this tutorial I hope to be able to explain to a Java developer on how I have 
 The provide the [actual source here](https://today.java.net/sites/all/modules/pubdlcnt/pubdlcnt.php?file=/today/2006/08/31/JotmInSpringAndHibernateSrc.zip&nid=219704). It can be found in this project under [JotmInSpringAndHibernateSrc folder](https://github.com/vahidhedayati/test-transactions/tree/master/JotmInSpringAndHibernateSrc).
 
 
-This is what is sort of being achieved, at the moment I have not spread it over multiple Databases and only using internal DB as part of the test: (will use mysql in conjunction when I next time to actually test all of these on the fly updates)
+This is what is sort of being achieved, at the moment I have not spread it over multiple Databases and only using internal DB as part of the test: (will use mysql in conjunction when I next get some time)
 
 
 ![BookingATrip](https://raw.github.com/vahidhedayati/test-transactions/master/images/Figure01_BookingATrip.jpg)
@@ -154,6 +154,46 @@ You will need grails 2.4.4 and you will need JDK 7+
 
 
 
+### Testing the site
+
+http://localhost:8080/test-transactions/travelBooking/index
+
+Vahid'z Dealz: Option 1 works the rest throw exceptions - need to still work on this - 
+		So click deal 1 ten times and it should then throw exception..  
+
+Now the first index is me doing a wrapper around what the project is doing. It probably needs to list all of the domain classes - at the moment the hotel rooms are not going down need to look into that -- but the flights when it reaches 0 it don't let any more through - it provides a drop down chooce option 1 10 ten times and post it... each time the flights go down by 1 :
+
+```
+Sofitel | Bookings 1 | Rooms: 10 | Left : 9
+The Ritz-Carlton | Bookings 0 | Rooms: 10 | Left : 10
+Affinia Dumont | Bookings 0 | Rooms: 10 | Left : 10
+Trump International Hotel | Bookings 0 | Rooms: 10 | Left : 10
+Hilton Times Square | Bookings 0 | Rooms: 10 | Left : 10
+Singapore Square | Bookings 0 | Rooms: 10 | Left : 10
+Lufthansa | Bookings 10 | Rooms: 10 >> 0
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+
+I will Sofitel | Bookings 1 | Rooms: 10 | Left : 9
+The Ritz-Carlton | Bookings 0 | Rooms: 10 | Left : 10
+Affinia Dumont | Bookings 0 | Rooms: 10 | Left : 10
+Trump International Hotel | Bookings 0 | Rooms: 10 | Left : 10
+Hilton Times Square | Bookings 0 | Rooms: 10 | Left : 10
+Singapore Square | Bookings 0 | Rooms: 10 | Left : 10
+Lufthansa | Bookings 10 | Rooms: 10 >> 0
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+Lufthansa | Bookings 0 | Rooms: 10 >> 10
+```
+
+I will be working on this to show how transactions rolling back in this all or none situation.. if I can or if possible..
+
+Other pages - this was the old manual demo I was using..
 
 http://localhost:8080/test-transactions/travelBooking/index1 works
 

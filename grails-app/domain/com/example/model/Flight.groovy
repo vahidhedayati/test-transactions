@@ -11,12 +11,17 @@ class Flight {
 	
 	
 	int seatsleft
-	static transients = ['seatsleft']
+	//static transients = ['seatsleft']
+	
+	static constraints = {
+		seatsleft nullable: true
+	}
+	
 	
 	static mapping = {
 		to column: '`to`'
 		from column: '`from`'
-		seatsleft formula: 'BOOKINS + 1 - TOTAL_SEATS'
+		seatsleft formula: 'TOTAL_SEATS - BOOKINGS'
 	 }
 	
 	String toString() {
