@@ -7,7 +7,6 @@ class BookingRequest {
     String from
 	
 	static mapping = {
-		//datasource "DEFAULT"
 		to column: '`to`'
 		from column: '`from`'
 	 }

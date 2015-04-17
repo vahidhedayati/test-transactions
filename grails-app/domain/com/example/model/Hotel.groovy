@@ -12,20 +12,17 @@ class Hotel  {
 	
 	int roomsleft
 	
-	
 	static hasMany = [trip: Trip]
-	
-	
-	//int getRoomsleft() { (totalrooms - (bookings+1)) }
-	
+		
 	static constraints = {
 		roomtype size: 1..1
 		roomsleft nullable: true
 	}
 	
 	static mapping = { 
-		//datasource "mysql"
-		//datasources(['mysql', 'DEFAULT'])
+		//datasource 'ALL'
+		//datasource('other')
+		//datasources(['other', 'DEFAULT'])
 		roomsleft formula: 'TOTALROOMS - (BOOKINGS+1)'
 	}
 	

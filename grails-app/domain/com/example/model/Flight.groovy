@@ -10,7 +10,6 @@ class Flight {
     Date flightdate
 	
 	int seatsleft
-	//int getSeatsleft() { (totalSeats - (bookings+1)) }
 	
 	static hasMany = [trip: Trip]
 	
@@ -18,9 +17,7 @@ class Flight {
 		seatsleft nullable: true
 	}
 	
-	
 	static mapping = {
-		//datasource "DEFAULT"
 		to column: '`to`'
 		from column: '`from`'
 		seatsleft formula: 'TOTAL_SEATS - (BOOKINGS+1)'

@@ -7,6 +7,9 @@ import com.example.exception.TravelException
 import com.example.model.BookingRequest
 import com.example.model.Flight
 import com.example.model.Hotel
+import com.example.other.Preinput
+import com.example.other.Yac
+
 
 
 class TravelBookingController {
@@ -31,7 +34,11 @@ class TravelBookingController {
 				args: [org.apache.commons.lang.exception.ExceptionUtils.getRootCauseMessage(e)], 
 				default: "The Booking changes did not pass validation.<br/>{0}")]
 		}	
-		render view: 'index', model:[ hotels: Hotel.list(), flights: Flight.list(), bookings: BookingRequest.list(), output: output ] 
+		
+		Map model = [hotels: Hotel.list(), flights: Flight.list(), bookings: BookingRequest.list(), pp: Preinput.list(),
+			output: output, yac: Yac.list()]
+		
+		render view: 'index', model: model 
 	}
 	
 	def index1() {

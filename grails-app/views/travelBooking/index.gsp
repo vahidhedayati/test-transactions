@@ -26,14 +26,38 @@
 			${flight.flightname } | Booking: <b>${flight.bookings}</b> | Total Seats: ${flight.totalSeats }|Empty seats: ${flight.seatsleft } <br/> 
 		</g:each>
 </td></tr>
-<tr><td>
+<tr>
+<td>
+<h1>Other DB Pre insert of any input</h1> <br/>
+
+		<g:each in="${pp }" var="pa">
+			${pa.name }  <br/>
+		</g:each>
+
+</td>
+<td>
 <h1>Bookings</h1> <br/>
 
 		
-		<g:each in="${bookingrequests }" var="bookings">
-			${bookings.traveldate } | From: ${bookings.from } | To: ${bookings.to } <br/>
+		<g:each in="${bookings }" var="booking">
+			${booking.traveldate } | From: ${booking.from } | To: ${booking.to } <br/>
 		</g:each>
-		</td></tr>
+		</td>
+		
+		
+		<td>
+
+<h1>Yac</h1> <br/>
+
+	<g:each in="${yac }" var="yc">
+			${yc.bookingId } |  ${yc.tripId }<br/>
+		</g:each>
+		
+		</td>
+		
+		
+		
+		</tr>
 
 </table>
 		

@@ -16,7 +16,6 @@ class Car  {
 	
 	
 	static mapping = {
-		//datasource "DEFAULT"
 		to column: '`to`'
 		from column: '`from`'
 	 }

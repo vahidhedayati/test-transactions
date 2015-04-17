@@ -7,14 +7,15 @@ dataSource {
 	logSql = true
 }
 
-/*
-dataSource_mysql {
-	url = "jdbc:mysql://localhost/myDB_dev?zeroDateTimeBehavior=convertToNull"
+
+dataSource_other {
+
+	url = "jdbc:mysql://localhost/YourDB?zeroDateTimeBehavior=convertToNull"
 
 	pooled = true
 	driverClassName ="com.mysql.jdbc.Driver"
-	username = "myJUser"
-	password = "myPass"
+	username = "YourUSER"
+	password = "YourPass"
 	zeroDateTimeBehavior="convertToNull"
 	dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 	//dialect = "com.example.dialect.VHMYSQLDialect"
@@ -29,7 +30,6 @@ dataSource_mysql {
 		validationQuery="SELECT 1"
 	}
 }
-*/
 
 
 
@@ -51,13 +51,13 @@ environments {
 			url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 		}
 
-		/*
-		dataSource_mysql {
+		
+		dataSource_other {
 			//configClass = HibernateFilterDomainConfiguration.class
 			dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
 			logSql = true
 		}
-		*/
+		
 	}
 	test {
 		dataSource {

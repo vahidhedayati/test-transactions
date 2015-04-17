@@ -30,7 +30,7 @@ I will touch on one more model : domainClass to explain an additional feature th
 
 In this domainClass you will notice:
 ```groovy
-roomsleft formula: 'BOOKINS + 1 - TOTALROOMS'
+roomsleft formula: 'TOTALROOMS - (BOOKINGS+1)'
 ```
 
 This is something you will see later in the Java code happening within the code a little later in another class.
@@ -109,7 +109,7 @@ On line [103](https://github.com/vahidhedayati/test-transactions/blob/master/Jot
 
 which was the formula above
 ```groovy
-roomsleft formula: 'BOOKINS + 1 - TOTALROOMS'
+roomsleft formula: 'TOTALROOMS - (BOOKINGS+1)'
 ```
 now defined with a much simpler query here:
 [Line 27 HotelManagerService.groovy](https://github.com/vahidhedayati/test-transactions/blob/master/grails-app/services/com/example/HotelManagerService.groovy#L27)
@@ -158,8 +158,6 @@ You will need grails 2.4.4 and you will need JDK 7+
 
 http://localhost:8080/test-transactions/travelBooking/index
 
-Vahid'z Dealz: Option 1 works the rest throw exceptions - need to still work on this - 
-		So click deal 1 ten times and it should then throw exception..  
 
 Now the first index is me doing a wrapper around what the project is doing. It probably needs to list all of the domain classes - at the moment the hotel rooms are not going down need to look into that -- but the flights when it reaches 0 it don't let any more through - it provides a drop down chooce option 1 10 ten times and post it... each time the flights go down by 1 :
 
